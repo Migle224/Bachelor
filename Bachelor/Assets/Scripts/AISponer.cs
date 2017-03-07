@@ -23,7 +23,7 @@ public class AISponer : MonoBehaviour {
         for (int i = 0; i < aiNumber; i++)
         {
             yield return new WaitForSeconds(sponTime);
-            Instantiate(AIprefab, Vector3.zero, gameObject.transform.rotation);
+            Instantiate(AIprefab, this.gameObject.transform.position, gameObject.transform.rotation);
         }
     }
 }

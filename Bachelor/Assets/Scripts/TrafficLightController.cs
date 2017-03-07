@@ -27,11 +27,11 @@ public class TrafficLightController : MonoBehaviour {
             yield return new WaitForSeconds(trafficSignalsTime);
             foreach (GameObject light in trafficLights)
             {
-                Debug.Log(light.GetComponent<Renderer>().material.name);
 
-                light.GetComponent<Renderer>().material = 
-                        light.GetComponent<Renderer>().material == trafficLightStopMaterial
-                        ? trafficLightGoMaterial : trafficLightStopMaterial;
+                if (string.Compare(light.GetComponent<Renderer>().material.name.Replace(" (Instance)",""), trafficLightStopMaterial.name) == 0)
+                    light.GetComponent<Renderer>().material = trafficLightGoMaterial;
+                else
+                    light.GetComponent<Renderer>().material = trafficLightStopMaterial;
                 
             }
         }

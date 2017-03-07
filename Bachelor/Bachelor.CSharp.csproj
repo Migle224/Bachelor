@@ -75,7 +75,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\DestinationInfo.cs" />
+    <Compile Include="Assets\Scripts\AIInfoWindowController.cs" />
     <Compile Include="Assets\Scripts\AISponer.cs" />
+    <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Movement.cs" />
     <Compile Include="Assets\Scripts\TrafficLightController.cs" />
   </ItemGroup>
