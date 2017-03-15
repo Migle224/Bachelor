@@ -75,12 +75,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\DestinationInfo.cs" />
+    <Compile Include="Assets\Scripts\AIController.cs" />
+    <Compile Include="Assets\Scripts\AIEventsHandler.cs" />
     <Compile Include="Assets\Scripts\AIInfoWindowController.cs" />
+    <Compile Include="Assets\Scripts\AIPersonRole.cs" />
     <Compile Include="Assets\Scripts\AISponer.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Const.cs" />
+    <Compile Include="Assets\Scripts\DestinationInfo.cs" />
+    <Compile Include="Assets\Scripts\GameConstants.cs" />
+    <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\GameValues.cs" />
     <Compile Include="Assets\Scripts\Movement.cs" />
     <Compile Include="Assets\Scripts\TrafficLightController.cs" />
+    <Compile Include="Assets\Scripts\UIController.cs" />
+    <Compile Include="Assets\Scripts\WorldController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

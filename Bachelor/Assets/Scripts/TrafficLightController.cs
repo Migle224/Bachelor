@@ -17,7 +17,7 @@ public class TrafficLightController : MonoBehaviour {
     
     void AssigneTrafficLights()
     {
-        trafficLights = GameObject.FindGameObjectsWithTag("TrafficLight");
+        trafficLights = GameObject.FindGameObjectsWithTag("Zebra");
     }
 
     IEnumerator ChangeTrafficSignals()

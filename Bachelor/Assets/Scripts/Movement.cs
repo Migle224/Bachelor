@@ -14,6 +14,9 @@ public class Movement : MonoBehaviour {
     public Transform currentDestination;
     public float timeSinceDestination;
     public List<string> destinationsList;
+    Material startZebraPosition;
+
+    
 
     void Start()
     {
@@ -41,11 +44,12 @@ public class Movement : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        switch(other.gameObject.tag)
+        switch (other.gameObject.tag)
         {
-            case "TrafficLight":
+            case "Zebra":
                 this.trafficLightCollider = other;
-                this.CheckTrafficLightSignal();
+                this.onZebra = true;
+                this.StartZebraPosition();
                 break;
             case "Destination":
                 this.AssignNewDestination();
@@ -53,38 +57,36 @@ public class Movement : MonoBehaviour {
         }
 
     }
-
-    void AssignNewDestination()
+    void OnTriggerExit(Collider other)
     {
-        currentDestination = destinations[Random.Range(0, destinations.Length - 1)].transform;
+        agent.Resume();
+    }
+
+        void AssignNewDestination()
+    {
+        DestinationInfo destinationInfo = destinations[Random.Range(0, destinations.Length - 1)].GetComponent<DestinationInfo>();
+        currentDestination = destinationInfo.gameObject.transform;
         timeSinceDestination = Time.timeSinceLevelLoad;
-        destinationsList.Add(currentDestination.GetComponent<DestinationInfo>().destinationName);
+        destinationsList.Add(destinationInfo.destinationName);
+        this.gameObject.GetComponent<Renderer>().material = destinationInfo.destinationMaterial;
     }
 
-    void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag == "Zebra")
-        {
-            this.onZebra = true;
-        }
-    }
 
     void OnTriggerStay(Collider other)
     {
         switch (other.gameObject.tag)
         {
-            case "TrafficLight":
+            case "Zebra":
                 this.CheckTrafficLightSignal();
                 break;
         }
     }
 
-    void OnCollisionExit(Collision other)
+    void StartZebraPosition()
     {
-        if (other.gameObject.tag == "Zebra")
-        {
-            this.onZebra = false;
-        }
+        Material trafficLightMaterial = trafficLightCollider.gameObject.GetComponent<Renderer>().material;
+        if (string.Compare(trafficLightMaterial.name.Replace(" (Instance)", ""), trafficLightStopMaterial.name) == 0)
+            agent.Stop();
     }
 
 
@@ -92,12 +94,7 @@ public class Movement : MonoBehaviour {
     {
         Material trafficLightMaterial = trafficLightCollider.gameObject.GetComponent<Renderer>().material;
 
-        if (string.Compare(trafficLightMaterial.name.Replace(" (Instance)", ""), trafficLightStopMaterial.name) == 0
-            && !this.onZebra)
-        {
-            agent.Stop();
-        }
-        else
+        if (string.Compare(trafficLightMaterial.name.Replace(" (Instance)", ""), trafficLightStopMaterial.name) != 0)
         {
             agent.Resume();
         }

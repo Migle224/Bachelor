@@ -10,7 +10,7 @@ public class AISponer : MonoBehaviour {
     public float sponTime;
 
 	void Start () {
-        StartCoroutine(SponAI());
+       // StartCoroutine(SponAI());
     }
 	
 	// Update is called once per frame
