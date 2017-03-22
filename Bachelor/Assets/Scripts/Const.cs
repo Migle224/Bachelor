@@ -8,6 +8,13 @@ public struct AICounter
     int amount;
 }
 
+public enum DestinationType
+{
+    WorkPlace = 1,
+    CoffePlace = 2,
+    BusStop = 3,
+    Home = 4
+}
 
 public enum Role
 {
@@ -36,6 +43,7 @@ public struct DestinationInformation
     public float probabillity;
     public GameObject destiantion;
 }
+
 
 
 public static class Const  {
