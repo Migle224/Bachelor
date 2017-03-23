@@ -9,16 +9,30 @@ public class BaseAI
     GameManager gameManager;
     protected List<ShelduleInfo> sheldule = new List<ShelduleInfo>();
     protected NavMeshAgent agent;
+    Material trafficLightStopMaterial;
+    Collider trafficLightCollider;
+    TrafficLightController trafficLightController;
+    protected GameObject go;
+    protected BaseAIBehaviour baseAI;
 
     public BaseAI() {
-        Debug.Log("BaseAI construct");
+        
     }
 
     public virtual void Start()
     {
+        this.AddComponents();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         this.SetDestination(gameManager.timeOfDay);
+        trafficLightController = GameObject.FindGameObjectWithTag("TrafficLightController").GetComponent<TrafficLightController>();
+        trafficLightStopMaterial = trafficLightController.trafficLightStopMaterial;
+        
+    }
 
+    void AddComponents()
+    {
+        agent = go.AddComponent<NavMeshAgent>();
+        go.AddComponent<Rigidbody>().isKinematic = true;
     }
 
     void SetDestination(float _timeOfDay)
@@ -72,18 +86,53 @@ public class BaseAI
 
     public virtual void Update()
     {
-
+        if (nextDestination.time < gameManager.timeOfDay)
+            this.SetDestination();
 
     }
 
     public virtual void OnTriggerEnter(Collider other)
     {
-
+        switch (other.gameObject.tag)
+        {
+            case "Zebra":
+                this.trafficLightCollider = other;
+                this.StartZebraPosition();
+                break;
+        }
     }
 
+    void StartZebraPosition()
+    {
+        Material trafficLightMaterial = trafficLightCollider.gameObject.GetComponent<Renderer>().material;
+        if (string.Compare(trafficLightMaterial.name.Replace(" (Instance)", ""), trafficLightStopMaterial.name) == 0)
+            agent.Stop();
+    }
     public virtual void InitSheldule() { }
 
+    public void OnTriggerStay(Collider other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case "Zebra":
+                this.CheckTrafficLightSignal();
+                break;
+        }
+    }
 
+    public void OnTriggerExit(Collider other)
+    {
+        agent.Resume();
+    }
 
+    void CheckTrafficLightSignal()
+    {
+        Material trafficLightMaterial = trafficLightCollider.gameObject.GetComponent<Renderer>().material;
+
+        if (string.Compare(trafficLightMaterial.name.Replace(" (Instance)", ""), trafficLightStopMaterial.name) != 0)
+        {
+            agent.Resume();
+        }
+    }
 }
 

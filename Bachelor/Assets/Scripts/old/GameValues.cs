@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameValues : MonoBehaviour {
-    public int speed;
+    public int speed = 10;
 	// Use this for initialization
 	void Start () {
 		

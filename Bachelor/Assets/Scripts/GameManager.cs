@@ -5,13 +5,14 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public float timeOfDay;
-	// Use this for initialization
-	void Start () {
+    public int speed = 20;
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        timeOfDay = Time.timeSinceLevelLoad % (24 * 60);
+        timeOfDay = speed * Time.timeSinceLevelLoad % (24 * 60);
 	}
 }

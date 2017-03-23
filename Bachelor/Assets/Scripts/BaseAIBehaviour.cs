@@ -20,5 +20,16 @@ public class BaseAIBehaviour : MonoBehaviour
     void Start()
     {
         ai.Start();
+
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        ai.OnTriggerStay(other);
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        ai.OnTriggerExit(other);
     }
 }

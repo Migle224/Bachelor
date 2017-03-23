@@ -57,7 +57,7 @@ public static class Const  {
                 PARLAMENT = "Parlament",
                 WORKPLACE = "WorkPlace",
                 tagDESTINATION = "Destination",
-                tagGAMECONTROLLER = "GameController";
+                tagGAMEMANAGER = "GameManager";
 
     public const float SPONTIME = 0.2f;
                            
