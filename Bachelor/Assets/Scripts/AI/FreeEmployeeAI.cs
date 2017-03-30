@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class StudentAI : BaseAI 
+public class FreeEmployeeAI : BaseAI 
 {   
     List<GameObject> destinationWorkPlaces, destiantionBusStop, destinationCaffes, destinationHomes;
 
 
-    public StudentAI(GameObject _go, List<GameObject> _destinationWorkPlaces, List<GameObject> _destiantionBusStop, List<GameObject> _destinationCaffes, List<GameObject> _destinationHomes)
+    public FreeEmployeeAI(GameObject _go, List<GameObject> _destinationWorkPlaces, List<GameObject> _destiantionBusStop, List<GameObject> _destinationCaffes, List<GameObject> _destinationHomes)
     {
         this.destiantionBusStop = _destiantionBusStop;
         this.destinationCaffes = _destinationCaffes;
@@ -26,30 +26,31 @@ public class StudentAI : BaseAI
     public override void InitSheldule()
     {
         ShelduleInfo shelduleInfo;
+        int workDayStart = Random.Range(0, 15);
         GameObject workPlace;
 
-        shelduleInfo.time = 6 * 60;
+        shelduleInfo.time = (workDayStart - 2) * 60;
         shelduleInfo.destination = destiantionBusStop[Random.Range(0, destiantionBusStop.Count - 1)];
         sheldule.Add(shelduleInfo);
 
-        shelduleInfo.time = 8 * 60;
+        shelduleInfo.time = workDayStart * 60;
         workPlace = destinationWorkPlaces[Random.Range(0, destinationWorkPlaces.Count - 1)];
         shelduleInfo.destination = workPlace;
         sheldule.Add(shelduleInfo);
 
-        shelduleInfo.time = 12 * 60;
+        shelduleInfo.time = (workDayStart + 4) * 60;
         shelduleInfo.destination = destinationCaffes[Random.Range(0, destinationCaffes.Count - 1)];
         sheldule.Add(shelduleInfo);
 
-        shelduleInfo.time = 13 * 60;
+        shelduleInfo.time = (workDayStart + 5) * 60;
         shelduleInfo.destination = workPlace;
         sheldule.Add(shelduleInfo);
 
-        shelduleInfo.time = 17 * 60;
+        shelduleInfo.time = (workDayStart + 9) * 60;
         shelduleInfo.destination = destiantionBusStop[Random.Range(0, destiantionBusStop.Count - 1)];
         sheldule.Add(shelduleInfo);
 
-        shelduleInfo.time = 20 * 60;
+        shelduleInfo.time = (workDayStart + 12) * 60;
         shelduleInfo.destination = destinationHomes[Random.Range(0, destinationHomes.Count - 1)];
         sheldule.Add(shelduleInfo);
     }

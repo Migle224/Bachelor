@@ -23,7 +23,7 @@ public enum Role
     Turist = 2,
     Child = 3,
     Homeless = 4,
-    FreeEmplyee = 5
+    FreeEmployee = 5
 }
 
 public struct ShelduleInfo
@@ -56,8 +56,10 @@ public static class Const  {
                 KUDIRKASQUARE = "KudirkaSquare",
                 PARLAMENT = "Parlament",
                 WORKPLACE = "WorkPlace",
+                tagSIMULATIONMANAGER = "SimulationManager",
                 tagDESTINATION = "Destination",
                 tagGAMEMANAGER = "GameManager";
+                
 
     public const float SPONTIME = 0.2f;
                            

@@ -14,7 +14,7 @@ public class AIPersonRole : MonoBehaviour {
         child.role = Role.Child;
         homeless.role = Role.Homeless;
         none.role = Role.None;
-        freeEmployee.role = Role.FreeEmplyee;
+        freeEmployee.role = Role.FreeEmployee;
 
 
     }
@@ -35,7 +35,7 @@ public class AIPersonRole : MonoBehaviour {
             case Role.Child:
                 return child;
 
-            case Role.FreeEmplyee:
+            case Role.FreeEmployee:
                 return freeEmployee;
 
             default:
@@ -60,7 +60,7 @@ public class AIPersonRole : MonoBehaviour {
             case Role.Child:
                 child.sheldule.Add(_shelduleInfo);
                 break;
-            case Role.FreeEmplyee:
+            case Role.FreeEmployee:
                 freeEmployee.sheldule.Add(_shelduleInfo);
                 break;
             default:
@@ -90,7 +90,7 @@ public class AIPersonRole : MonoBehaviour {
             case Role.Child:
                 child.sheldule.Add(shelduleInfo);
                 break;
-            case Role.FreeEmplyee:
+            case Role.FreeEmployee:
                 freeEmployee.sheldule.Add(shelduleInfo);
                 break;
             default:

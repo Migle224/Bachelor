@@ -37,7 +37,7 @@ public class AIController : MonoBehaviour {
                 break;
             case Role.Employee:
                 break;
-            case Role.FreeEmplyee:
+            case Role.FreeEmployee:
                 break;
             case Role.Homeless:
                 break;

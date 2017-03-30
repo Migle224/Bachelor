@@ -46,6 +46,7 @@ public class BaseAI
                 agent.SetDestination(last.destination.transform.position);
                 currentDestination = last;
                 nextDestination = info;
+                go.GetComponent<Renderer>().material = currentDestination.destination.GetComponent<DestinationInfo>().destinationMaterial;
                 break;
             }
             else
@@ -65,6 +66,7 @@ public class BaseAI
     {
         currentDestination = nextDestination;
         agent.SetDestination(currentDestination.destination.transform.position);
+        go.GetComponent<Renderer>().material = currentDestination.destination.GetComponent<DestinationInfo>().destinationMaterial;
 
         if (currentDestination.Equals(sheldule[sheldule.Count - 1]))
         {
@@ -75,11 +77,12 @@ public class BaseAI
             nextDestination = sheldule[sheldule.FindIndex(isCurrent) + 1];
         }
 
+        
+
     }
 
     private bool isCurrent(ShelduleInfo name)
     {
-
         return (name.Equals(currentDestination));
     }
 
@@ -88,7 +91,6 @@ public class BaseAI
     {
         if (nextDestination.time < gameManager.timeOfDay)
             this.SetDestination();
-
     }
 
     public virtual void OnTriggerEnter(Collider other)
@@ -108,6 +110,7 @@ public class BaseAI
         if (string.Compare(trafficLightMaterial.name.Replace(" (Instance)", ""), trafficLightStopMaterial.name) == 0)
             agent.Stop();
     }
+
     public virtual void InitSheldule() { }
 
     public void OnTriggerStay(Collider other)
