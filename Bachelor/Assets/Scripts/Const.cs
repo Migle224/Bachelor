@@ -13,7 +13,8 @@ public enum DestinationType
     WorkPlace = 1,
     CoffePlace = 2,
     BusStop = 3,
-    Home = 4
+    Home = 4,
+    TuristPlace = 5
 }
 
 public enum Role
@@ -52,14 +53,16 @@ public static class Const  {
                 CHATEDRAL = "Chatedral",
                 GEDIMINASHILL = "GediminasHill",
                 LUKISKESSQUARE = "LukiskesSquare",
-                MUSEUM  = "Museum",
+                MUSEUM = "Museum",
                 KUDIRKASQUARE = "KudirkaSquare",
                 PARLAMENT = "Parlament",
                 WORKPLACE = "WorkPlace",
                 tagSIMULATIONMANAGER = "SimulationManager",
                 tagDESTINATION = "Destination",
-                tagGAMEMANAGER = "GameManager";
-                
+                tagGAMEMANAGER = "GameManager",
+                tagTRAFFICLIGHTCONTROLLER = "TrafficLightController",
+                tagZEBRA = "Zebra";
+
 
     public const float SPONTIME = 0.2f;
                            

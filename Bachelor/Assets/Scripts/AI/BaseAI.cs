@@ -14,6 +14,7 @@ public class BaseAI
     TrafficLightController trafficLightController;
     protected GameObject go;
     protected BaseAIBehaviour baseAI;
+    SimulationManager simulationManager;
 
     public BaseAI() {
         
@@ -22,11 +23,11 @@ public class BaseAI
     public virtual void Start()
     {
         this.AddComponents();
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.FindGameObjectWithTag(Const.tagGAMEMANAGER).GetComponent<GameManager>();
         this.SetDestination(gameManager.timeOfDay);
-        trafficLightController = GameObject.FindGameObjectWithTag("TrafficLightController").GetComponent<TrafficLightController>();
+        trafficLightController = GameObject.FindGameObjectWithTag(Const.tagTRAFFICLIGHTCONTROLLER).GetComponent<TrafficLightController>();
         trafficLightStopMaterial = trafficLightController.trafficLightStopMaterial;
-        
+        simulationManager = GameObject.FindGameObjectWithTag(Const.tagSIMULATIONMANAGER).GetComponent<SimulationManager>();
     }
 
     void AddComponents()
@@ -97,9 +98,13 @@ public class BaseAI
     {
         switch (other.gameObject.tag)
         {
-            case "Zebra":
+            case Const.tagZEBRA:
                 this.trafficLightCollider = other;
                 this.StartZebraPosition();
+                break;
+            case Const.tagDESTINATION:
+                if(other.gameObject.GetInstanceID() == currentDestination.destination.GetInstanceID())
+                    simulationManager.AddToWakeUpList(this.go.gameObject, nextDestination.time);
                 break;
         }
     }
