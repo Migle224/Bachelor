@@ -32,4 +32,10 @@ public class BaseAIBehaviour : MonoBehaviour
     {
         ai.OnTriggerExit(other);
     }
+
+    public void ResumeMovement()
+    {
+        ai.ResumeMovement();
+        Debug.Log("me enabled");
+    }
 }

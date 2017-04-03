@@ -103,8 +103,12 @@ public class BaseAI
                 this.StartZebraPosition();
                 break;
             case Const.tagDESTINATION:
-                if(other.gameObject.GetInstanceID() == currentDestination.destination.GetInstanceID())
-                    simulationManager.AddToWakeUpList(this.go.gameObject, nextDestination.time);
+                if (other.gameObject.GetInstanceID() == currentDestination.destination.GetInstanceID())
+                {
+                    float nextDestinaitonTime = nextDestination.time; 
+                    this.SetDestination();
+                    simulationManager.AddToWakeUpList(this.go.gameObject, nextDestinaitonTime);
+                }
                 break;
         }
     }
@@ -113,7 +117,7 @@ public class BaseAI
     {
         Material trafficLightMaterial = trafficLightCollider.gameObject.GetComponent<Renderer>().material;
         if (string.Compare(trafficLightMaterial.name.Replace(" (Instance)", ""), trafficLightStopMaterial.name) == 0)
-            agent.Stop();
+            agent.isStopped = true;
     }
 
     public virtual void InitSheldule() { }
@@ -130,7 +134,7 @@ public class BaseAI
 
     public void OnTriggerExit(Collider other)
     {
-        agent.Resume();
+        agent.isStopped = false;
     }
 
     void CheckTrafficLightSignal()
@@ -139,8 +143,13 @@ public class BaseAI
 
         if (string.Compare(trafficLightMaterial.name.Replace(" (Instance)", ""), trafficLightStopMaterial.name) != 0)
         {
-            agent.Resume();
+            agent.isStopped = false;
         }
+    }
+
+    public void ResumeMovement()
+    {
+        this.SetDestination();
     }
 }
 

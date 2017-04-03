@@ -18,8 +18,12 @@ public class UIController : MonoBehaviour
     // Use this for initialization
     void Start () {
         gameManager = GameObject.FindGameObjectWithTag(Const.tagGAMEMANAGER).GetComponent<GameManager>();
-      //  speed = gameManager.speed;
-	}
+        employeeAmount.text = "0";
+        turistAmount.text = "0";
+        homelessAmount.text = "0";
+        freeEmployeeAmount.text = "0";
+        //  speed = gameManager.speed;
+    }
 	
 	// Update is called once per frame
 	void Update () {

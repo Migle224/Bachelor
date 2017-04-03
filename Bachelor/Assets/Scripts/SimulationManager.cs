@@ -9,14 +9,12 @@ public class SimulationManager : MonoBehaviour {
 
     SortedList<float, GameObject> objectsToWakeUp = new SortedList<float, GameObject>();
     GameManager gameManager;
-    // Use this for initialization
-
     List<GameObject> destinationWorkPlaces = new List<GameObject>(), destiantionBusStop = new List<GameObject>(), destinationCaffes = new List<GameObject>(), destinationHomes = new List<GameObject>();
+
     void Start () {
         gameManager = GameObject.FindGameObjectWithTag(Const.tagGAMEMANAGER).GetComponent<GameManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -56,28 +54,28 @@ public class SimulationManager : MonoBehaviour {
         switch (_role)
         {
             case Role.Turist:
-                for (int i = 0; i <= _amount; i++)
+                for (int i = 0; i < _amount; i++)
                 {
                     new TuristAI(Instantiate(turistAIObject), destinationWorkPlaces, destiantionBusStop, destinationCaffes, destinationHomes);
                     yield return new WaitForSeconds(spawnTime);
                 }
                 break;
             case Role.Employee:
-                for (int i = 0; i <= _amount; i++)
+                for (int i = 0; i < _amount; i++)
                 {
                     new EmployeeAI(Instantiate(employeeAIObject), destinationWorkPlaces, destiantionBusStop, destinationCaffes, destinationHomes);
                     yield return new WaitForSeconds(spawnTime);
                 }
                 break;
             case Role.FreeEmployee:
-                for (int i = 0; i <= _amount; i++)
+                for (int i = 0; i < _amount; i++)
                 {
                     new FreeEmployeeAI(Instantiate(freeEmployeeAIObject), destinationWorkPlaces, destiantionBusStop, destinationCaffes, destinationHomes);
                     yield return new WaitForSeconds(spawnTime);
                 }
                 break;
             case Role.Homeless:
-                for (int i = 0; i <= _amount; i++)
+                for (int i = 0; i < _amount; i++)
                 {
                     new HomelessAI(Instantiate(homelessAIObject), destinationWorkPlaces, destiantionBusStop, destinationCaffes, destinationHomes);
                     yield return new WaitForSeconds(spawnTime);
@@ -97,9 +95,9 @@ public class SimulationManager : MonoBehaviour {
         {
             try
             {
-                //objectsToWakeUp.Add(wakeUpTime, _gameObject);
-                objectsToWakeUp.Add(_gameObject.GetInstanceID(), _gameObject);
-                Debug.Log("Added id: " + _gameObject.GetInstanceID() + " and time: " + _wakeUpTime);
+                objectsToWakeUp.Add(wakeUpTime, _gameObject);
+                //objectsToWakeUp.Add(_gameObject.GetInstanceID(), _gameObject);
+              //  Debug.Log("Added id: " + _gameObject.GetInstanceID() + " and time: " + _wakeUpTime);
                 _gameObject.SetActive(false);
                 
                 
@@ -107,10 +105,11 @@ public class SimulationManager : MonoBehaviour {
             }
             catch 
             {
-                Debug.Log("Key = " + _gameObject.GetInstanceID() + " is found. Retrying for : " + retriedTimes + " time. uniqID: " + _gameObject.GetInstanceID() + ", time : " + _wakeUpTime) ;
+                //Debug.Log("Key = " + wakeUpTime + " is found. Retrying for : " + retriedTimes + " time. uniqID: " + _gameObject.GetInstanceID()) ;
                 retriedTimes++;
                 wakeUpTimeModifier += wakeUpTimeModifier * _gameObject.GetInstanceID();
-                wakeUpTime = wakeUpTime + wakeUpTimeModifier * _gameObject.GetInstanceID();
+                wakeUpTime = wakeUpTime + wakeUpTimeModifier ;
+             //   Debug.Log(" new time : " + _wakeUpTime);
             }
         }       
     }
@@ -128,6 +127,8 @@ public class SimulationManager : MonoBehaviour {
             {
                 objectToWakeUp = objectsToWakeUp[index];
                 objectToWakeUp.SetActive(true);
+                objectToWakeUp.GetComponent<BaseAIBehaviour>().ResumeMovement();
+                
                 objectsToWakeUp.Remove(index);
                 if (objectsToWakeUp.Count > 0)
                     index = objectsToWakeUp.Keys[0];
