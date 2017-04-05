@@ -17,11 +17,6 @@ public class SimulationManager : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        { 
-            BaseAI ai = new EmployeeAI(Instantiate(employeeAIObject), destinationWorkPlaces, destiantionBusStop, destinationCaffes, destinationHomes);
-        }
-
         this.WakeUpGameObjects(gameManager.timeOfDay);
     }
 
@@ -116,7 +111,6 @@ public class SimulationManager : MonoBehaviour {
 
     void WakeUpGameObjects(float _timeOfDay)
     {
-        int i = 0;
         float index;
         GameObject objectToWakeUp;
 

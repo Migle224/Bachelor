@@ -35,7 +35,11 @@ public class BaseAIBehaviour : MonoBehaviour
 
     public void ResumeMovement()
     {
-        ai.ResumeMovement();
-        Debug.Log("me enabled");
+        ai.ResumeMovement();        
+    }
+
+    void OnEnable()
+    {
+
     }
 }

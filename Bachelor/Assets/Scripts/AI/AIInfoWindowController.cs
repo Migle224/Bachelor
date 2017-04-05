@@ -14,7 +14,7 @@ public class AIInfoWindowController : MonoBehaviour {
     void Update()
     {
 
-        if (Input.GetMouseButton(0))
+       /* if (Input.GetMouseButton(0))
         { // << use GetMouseButton instead of GetMouseButtonDown
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -30,7 +30,7 @@ public class AIInfoWindowController : MonoBehaviour {
 
 
             }
-        }
+        }*/
     }
 
     void HideSelectedAI()
@@ -45,10 +45,10 @@ public class AIInfoWindowController : MonoBehaviour {
         selectedAI.GetComponent<Renderer>().material = selectedAIMaterial;
     }
 
-    void ShowAIInfo(Movement _aiInfo)
+    /*void ShowAIInfo(Movement _aiInfo)
     {
         this.destinationText.text = "Destination: " + _aiInfo.currentDestination.gameObject.GetComponent<DestinationInfo>().destinationName;
         this.timeText.text = "Time for this destination: " + (Time.timeSinceLevelLoad - _aiInfo.timeSinceDestination);
         this.destinationsListText.text = "Destinations list: " + _aiInfo.destinationsList.ToString();
-    }
+    }*/
 }

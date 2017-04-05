@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WorldController : MonoBehaviour {
 
-    List<GameObject> workPlaces = new List<GameObject>(), turistPlaces = new List<GameObject>(), busStops = new List<GameObject>();
+    /*List<GameObject> workPlaces = new List<GameObject>(), turistPlaces = new List<GameObject>(), busStops = new List<GameObject>();
     GameObject[] destinations;
 
 	// Use this for initialization
@@ -69,5 +69,5 @@ public class WorldController : MonoBehaviour {
                     break;
             }
         }
-    }
+    }*/
 }

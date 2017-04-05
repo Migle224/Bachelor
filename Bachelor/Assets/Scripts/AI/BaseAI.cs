@@ -15,9 +15,9 @@ public class BaseAI
     protected GameObject go;
     protected BaseAIBehaviour baseAI;
     SimulationManager simulationManager;
+    bool waitForNextDay = false;
 
     public BaseAI() {
-        
     }
 
     public virtual void Start()
@@ -37,9 +37,9 @@ public class BaseAI
     }
 
     void SetDestination(float _timeOfDay)
-    {
+    {//TODO: rewrite logic for the next destiantion
+        //TODO: combine this and other SetDestianion method
         ShelduleInfo last = sheldule[0];
-
         foreach (ShelduleInfo info in sheldule)
         {
             if (info.time > _timeOfDay)
@@ -47,7 +47,7 @@ public class BaseAI
                 agent.SetDestination(last.destination.transform.position);
                 currentDestination = last;
                 nextDestination = info;
-                go.GetComponent<Renderer>().material = currentDestination.destination.GetComponent<DestinationInfo>().destinationMaterial;
+               
                 break;
             }
             else
@@ -59,7 +59,16 @@ public class BaseAI
         if (currentDestination.Equals( sheldule[sheldule.Count - 1]))
         {
             nextDestination = sheldule[0];
+            waitForNextDay = true;
         }
+
+        if (currentDestination.destination == null)
+        {
+            currentDestination = sheldule[0];
+            nextDestination = sheldule[1];
+        }
+
+        go.GetComponent<Renderer>().material = currentDestination.destination.GetComponent<DestinationInfo>().destinationMaterial;
     }
 
 
@@ -67,18 +76,19 @@ public class BaseAI
     {
         currentDestination = nextDestination;
         agent.SetDestination(currentDestination.destination.transform.position);
-        go.GetComponent<Renderer>().material = currentDestination.destination.GetComponent<DestinationInfo>().destinationMaterial;
+        
 
         if (currentDestination.Equals(sheldule[sheldule.Count - 1]))
         {
             nextDestination = sheldule[0];
+            waitForNextDay = true;
         }
         else
         {
             nextDestination = sheldule[sheldule.FindIndex(isCurrent) + 1];
         }
 
-        
+        go.GetComponent<Renderer>().material = currentDestination.destination.GetComponent<DestinationInfo>().destinationMaterial;
 
     }
 
@@ -90,7 +100,10 @@ public class BaseAI
 
     public virtual void Update()
     {
-        if (nextDestination.time < gameManager.timeOfDay)
+        if (waitForNextDay && gameManager.timeOfDay > 0 && gameManager.timeOfDay < 60)
+            waitForNextDay = false;
+
+        if (nextDestination.time < gameManager.timeOfDay && !waitForNextDay)
             this.SetDestination();
     }
 

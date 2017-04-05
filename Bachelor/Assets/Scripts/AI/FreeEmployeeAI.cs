@@ -26,7 +26,7 @@ public class FreeEmployeeAI : BaseAI
     public override void InitSheldule()
     {
         ShelduleInfo shelduleInfo;
-        int workDayStart = Random.Range(0, 15);
+        int workDayStart = Random.Range(6, 11);
         GameObject workPlace;
 
         shelduleInfo.time = (workDayStart - 2) * 60;

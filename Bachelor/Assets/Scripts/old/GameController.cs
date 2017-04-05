@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
-    AIController aiController;
+   // AIController aiController;
     public WorldController wordController;
 
     public GameObject aiPrefab;
@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour {
 
     public void GenerateAI(Role _role, int _amount)
     {
-        wordController.GenerateAI(aiPrefab, _role, _amount);
+    //    wordController.GenerateAI(aiPrefab, _role, _amount);
     }
 
     void AssignAISheldule() { }

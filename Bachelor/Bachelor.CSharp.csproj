@@ -89,18 +89,16 @@
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Const.cs" />
     <Compile Include="Assets\Scripts\DestinationInfo.cs" />
-    <Compile Include="Assets\Scripts\GameConstants.cs" />
-    <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\LightContoller.cs" />
     <Compile Include="Assets\Scripts\Observer.cs" />
     <Compile Include="Assets\Scripts\SimulationManager.cs" />
     <Compile Include="Assets\Scripts\TrafficLightController.cs" />
     <Compile Include="Assets\Scripts\UIController.cs" />
     <Compile Include="Assets\Scripts\WorldController.cs" />
-    <Compile Include="Assets\Scripts\old\AIController.cs" />
-    <Compile Include="Assets\Scripts\old\AIPersonRole.cs" />
+    <Compile Include="Assets\Scripts\old\GameConstants.cs" />
+    <Compile Include="Assets\Scripts\old\GameController.cs" />
     <Compile Include="Assets\Scripts\old\GameValues.cs" />
-    <Compile Include="Assets\Scripts\old\Movement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
