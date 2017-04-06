@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     int timeToShow;
     const float TIMESTARTMODIFIER = 0.2f;
     GameManager gameManager;
+    public GameObject createUserAIPanel;
 
     public InputField employeeAmount, turistAmount, homelessAmount, freeEmployeeAmount;
 
@@ -49,6 +50,11 @@ public class UIController : MonoBehaviour
         gameManager.InstantiateAI(Role.FreeEmployee, int.Parse(freeEmployeeAmount.text));
         gameManager.InstantiateAI(Role.Homeless, int.Parse(homelessAmount.text));
         gameManager.InstantiateAI(Role.Turist, int.Parse(turistAmount.text));
+    }
+
+    public void ShowHideUserAIPanel()
+    {
+        createUserAIPanel.SetActive(!createUserAIPanel.active);
     }
 
 }

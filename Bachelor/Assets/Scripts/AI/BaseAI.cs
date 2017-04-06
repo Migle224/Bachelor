@@ -16,6 +16,7 @@ public class BaseAI
     protected BaseAIBehaviour baseAI;
     SimulationManager simulationManager;
     bool waitForNextDay = false;
+    string description;
 
     public BaseAI() {
     }

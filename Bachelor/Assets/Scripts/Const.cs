@@ -39,6 +39,20 @@ public struct RoleInfo
 
 }
 
+public struct ShelduleByPlaces
+{
+    public int time;
+    public DestinationType destinationType;
+}
+
+[System.Serializable]
+public class ShelduleToSave
+{
+    public static ShelduleToSave current;
+    public string description;
+    public List<ShelduleByPlaces> shelduleByplaceList;
+}
+
 public struct DestinationInformation
 {
     public float probabillity;
@@ -61,7 +75,8 @@ public static class Const  {
                 tagDESTINATION = "Destination",
                 tagGAMEMANAGER = "GameManager",
                 tagTRAFFICLIGHTCONTROLLER = "TrafficLightController",
-                tagZEBRA = "Zebra";
+                tagZEBRA = "Zebra",
+                tagSTREETLAMP = "StreetLamp";
 
 
     public const float SPONTIME = 0.2f;

@@ -130,4 +130,14 @@ public class SimulationManager : MonoBehaviour {
         }
 
     }
+
+    public void SaveUserAI(string _description, List<ShelduleByPlaces> _shelduleByPlaces)
+    {
+        ShelduleToSave sts = new ShelduleToSave();
+        sts.description = _description;
+        sts.shelduleByplaceList = _shelduleByPlaces;
+        SaveLoad.Save();
+
+
+    }
 }
