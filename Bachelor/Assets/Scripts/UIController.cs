@@ -16,19 +16,20 @@ public class UIController : MonoBehaviour
 
     public InputField employeeAmount, turistAmount, homelessAmount, freeEmployeeAmount;
 
-    // Use this for initialization
+    public Dropdown usersAIDropdown;
+    public InputField userAIAmount;
+
     void Start () {
         gameManager = GameObject.FindGameObjectWithTag(Const.tagGAMEMANAGER).GetComponent<GameManager>();
         employeeAmount.text = "0";
         turistAmount.text = "0";
         homelessAmount.text = "0";
         freeEmployeeAmount.text = "0";
-        //  speed = gameManager.speed;
+        this.LoadDropDownAI();
     }
 	
-	// Update is called once per frame
 	void Update () {
-        timeToShow = (int)gameManager.timeOfDay;//(int)(Time.timeSinceLevelLoad * this.speed * TIMESTARTMODIFIER);
+        timeToShow = (int)gameManager.timeOfDay;
         hours = (timeToShow /  60) % 24;
         minutes = timeToShow % 60;
         timeText.text = hours +" hours " + minutes + "min.";
@@ -55,6 +56,16 @@ public class UIController : MonoBehaviour
     public void ShowHideUserAIPanel()
     {
         createUserAIPanel.SetActive(!createUserAIPanel.active);
+    }
+
+    public void InstantaiteLoadedAI()
+    {
+        gameManager.InstantiateAI(usersAIDropdown.transform.GetChild(0).GetComponent<Text>().text, int.Parse(userAIAmount.text));
+    }
+
+    void LoadDropDownAI()
+    {
+        usersAIDropdown.AddOptions(gameManager.GetLoadedAINames());
     }
 
 }

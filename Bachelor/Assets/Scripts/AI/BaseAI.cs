@@ -29,6 +29,7 @@ public class BaseAI
         trafficLightController = GameObject.FindGameObjectWithTag(Const.tagTRAFFICLIGHTCONTROLLER).GetComponent<TrafficLightController>();
         trafficLightStopMaterial = trafficLightController.trafficLightStopMaterial;
         simulationManager = GameObject.FindGameObjectWithTag(Const.tagSIMULATIONMANAGER).GetComponent<SimulationManager>();
+        go.gameObject.transform.position = currentDestination.destination.transform.position;
     }
 
     void AddComponents()
@@ -142,6 +143,14 @@ public class BaseAI
         {
             case "Zebra":
                 this.CheckTrafficLightSignal();
+                break;
+            case Const.tagDESTINATION:
+                if (other.gameObject.GetInstanceID() == currentDestination.destination.GetInstanceID())
+                {
+                    float nextDestinaitonTime = nextDestination.time;
+                    this.SetDestination();
+                    simulationManager.AddToWakeUpList(this.go.gameObject, nextDestinaitonTime);
+                }
                 break;
         }
     }

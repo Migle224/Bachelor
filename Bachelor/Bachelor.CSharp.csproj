@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\AI\FreeEmployeeAI.cs" />
     <Compile Include="Assets\Scripts\AI\HomelessAI.cs" />
     <Compile Include="Assets\Scripts\AI\TuristAI.cs" />
+    <Compile Include="Assets\Scripts\AI\UserCreatedAI.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Const.cs" />
     <Compile Include="Assets\Scripts\DestinationInfo.cs" />

@@ -9,10 +9,11 @@ public class TuristAI : BaseAI
     List<GameObject> destinations = new List<GameObject>();
 
 
-    public TuristAI(GameObject _go, List<GameObject> _destinationWorkPlaces, List<GameObject> _destiantionBusStop, List<GameObject> _destinationCaffes, List<GameObject> _destinationHomes)
+    public TuristAI(GameObject _go, List<GameObject> _destinationWorkPlaces, List<GameObject> _destiantionBusStop, List<GameObject> _destinationCaffes, List<GameObject> _destinationHomes, List<GameObject> _destinationTuristPlace)
     {
         destinations.AddRange(_destinationCaffes);
         destinations.AddRange(_destiantionBusStop);
+        destinations.AddRange(_destinationTuristPlace);
 
         this.go = _go;
         this.InitSheldule();

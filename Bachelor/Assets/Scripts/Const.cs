@@ -24,7 +24,8 @@ public enum Role
     Turist = 2,
     Child = 3,
     Homeless = 4,
-    FreeEmployee = 5
+    FreeEmployee = 5,
+    LoadedAI = 6
 }
 
 public struct ShelduleInfo
@@ -39,6 +40,7 @@ public struct RoleInfo
 
 }
 
+[System.Serializable]
 public struct ShelduleByPlaces
 {
     public int time;
