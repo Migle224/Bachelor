@@ -95,6 +95,7 @@
     <Compile Include="Assets\Scripts\Observer.cs" />
     <Compile Include="Assets\Scripts\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\SimulationManager.cs" />
+    <Compile Include="Assets\Scripts\StatisticsObserver.cs" />
     <Compile Include="Assets\Scripts\StreetLampController.cs" />
     <Compile Include="Assets\Scripts\TrafficLightController.cs" />
     <Compile Include="Assets\Scripts\UIController.cs" />

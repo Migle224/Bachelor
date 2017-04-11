@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseAIBehaviour : MonoBehaviour
 {
-    public  BaseAI ai;
+    public BaseAI ai;
 
 
     void OnTriggerEnter(Collider other)
@@ -20,7 +20,6 @@ public class BaseAIBehaviour : MonoBehaviour
     void Start()
     {
         ai.Start();
-
     }
 
     void OnTriggerStay(Collider other)
@@ -35,11 +34,26 @@ public class BaseAIBehaviour : MonoBehaviour
 
     public void ResumeMovement()
     {
-        ai.ResumeMovement();        
+        ai.ResumeMovement();
     }
 
-    void OnEnable()
+    /*void OnEnable()
     {
+        ai.OnEnable();
+    }*/
 
+    void OnDestroy()
+    {
+        ai.OnDestroy();
     }
+
+    void OnDisable()
+    {
+        ai.OnDisable();
+    }
+
+ /*   void Awake()
+    {
+        ai.Awake();
+    }*/
 }

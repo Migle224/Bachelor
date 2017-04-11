@@ -29,6 +29,7 @@ public class UserCreatedAI : BaseAI
         this.InitSheldule();
         baseAI = this.go.AddComponent<BaseAIBehaviour>();
         baseAI.ai = this;
+        this.role = Role.LoadedAI;
     }
 
     public override void InitSheldule()

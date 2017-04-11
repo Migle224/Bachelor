@@ -17,8 +17,25 @@ public class BaseAI
     SimulationManager simulationManager;
     bool waitForNextDay = false;
     string description;
+    private List<Observer> observers = new List<Observer>();
+    protected Role role;
 
-    public BaseAI() {
+    public BaseAI()
+    {
+        this.role = Role.None;
+        this.FindObservers();
+    }
+
+    void FindObservers()
+    {
+        GameObject[] obj = GameObject.FindGameObjectsWithTag(Const.tagOBSERVER);
+
+        foreach (GameObject ob in obj)
+            observers.Add(ob.GetComponent<Observer>());
+    }
+    public void Awake()
+    {
+      
     }
 
     public virtual void Start()
@@ -30,6 +47,7 @@ public class BaseAI
         trafficLightStopMaterial = trafficLightController.trafficLightStopMaterial;
         simulationManager = GameObject.FindGameObjectWithTag(Const.tagSIMULATIONMANAGER).GetComponent<SimulationManager>();
         go.gameObject.transform.position = currentDestination.destination.transform.position;
+        this.NotifyObservers(this.role, true);
     }
 
     void AddComponents()
@@ -49,7 +67,7 @@ public class BaseAI
                 agent.SetDestination(last.destination.transform.position);
                 currentDestination = last;
                 nextDestination = info;
-               
+
                 break;
             }
             else
@@ -58,7 +76,7 @@ public class BaseAI
             }
         }
 
-        if (currentDestination.Equals( sheldule[sheldule.Count - 1]))
+        if (currentDestination.Equals(sheldule[sheldule.Count - 1]))
         {
             nextDestination = sheldule[0];
             waitForNextDay = true;
@@ -73,12 +91,44 @@ public class BaseAI
         go.GetComponent<Renderer>().material = currentDestination.destination.GetComponent<DestinationInfo>().destinationMaterial;
     }
 
+    void NotifyObservers(GameObject _destination)
+    {
+        foreach (Observer ob in observers)
+        {
+            ob.UpdateDestination(DestinationType.None, _destination.GetComponent<DestinationInfo>().destiantionType);
+        }
+    }
+
+    void NotifyObservers(GameObject _destinationFrom, GameObject _destinationTo)
+    {
+        foreach (Observer ob in observers)
+        {
+            ob.UpdateDestination(_destinationFrom.GetComponent<DestinationInfo>().destiantionType, _destinationTo.GetComponent<DestinationInfo>().destiantionType);
+        }
+    }
+
+    void NotifyObservers(Role _role, bool _created)
+    {
+        foreach (Observer ob in observers)
+        {
+            ob.UpdateCount(_role, _created);
+        }
+    }
+
+    void NotifyObservers(bool _enabled)
+    {
+        foreach (Observer ob in observers)
+        {
+            ob.UpdateEnabledState(_enabled);
+        }
+    }
 
     void SetDestination()
     {
+        this.NotifyObservers(currentDestination.destination, nextDestination.destination);
         currentDestination = nextDestination;
         agent.SetDestination(currentDestination.destination.transform.position);
-        
+
 
         if (currentDestination.Equals(sheldule[sheldule.Count - 1]))
         {
@@ -98,7 +148,6 @@ public class BaseAI
     {
         return (name.Equals(currentDestination));
     }
-
 
     public virtual void Update()
     {
@@ -120,7 +169,7 @@ public class BaseAI
             case Const.tagDESTINATION:
                 if (other.gameObject.GetInstanceID() == currentDestination.destination.GetInstanceID())
                 {
-                    float nextDestinaitonTime = nextDestination.time; 
+                    float nextDestinaitonTime = nextDestination.time;
                     this.SetDestination();
                     simulationManager.AddToWakeUpList(this.go.gameObject, nextDestinaitonTime);
                 }
@@ -172,7 +221,27 @@ public class BaseAI
 
     public void ResumeMovement()
     {
+        this.NotifyObservers(true);//TODO write this somewhere else. On enabled
         this.SetDestination();
     }
-}
 
+    public void attach(Observer observer)
+    {
+        observers.Add(observer);
+    }
+
+    public void OnEnable()
+    {
+        this.NotifyObservers(true);
+    }
+
+    public void OnDestroy()
+    {
+        this.NotifyObservers(this.role, false);
+    }
+
+    public void OnDisable()
+    {
+        this.NotifyObservers(false);
+    }
+}

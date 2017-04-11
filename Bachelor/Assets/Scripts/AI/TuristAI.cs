@@ -18,7 +18,8 @@ public class TuristAI : BaseAI
         this.go = _go;
         this.InitSheldule();
         baseAI = this.go.AddComponent<BaseAIBehaviour>();
-        baseAI.ai = this;       
+        baseAI.ai = this;
+        this.role = Role.Turist;
     }
 
     public override void InitSheldule()

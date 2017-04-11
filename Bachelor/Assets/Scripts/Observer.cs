@@ -4,6 +4,8 @@ using UnityEngine;
 
 public interface Observer {
 
-    void SpeedChanged(int _newSpeed);
-    
+    void UpdateDestination(DestinationType _destinaitonFrom, DestinationType _destinationTo);
+    void UpdateEnabledState(bool _enabled);
+    void UpdateCount(Role _role, bool _created);
+
 }

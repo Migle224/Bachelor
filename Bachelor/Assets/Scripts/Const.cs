@@ -10,6 +10,7 @@ public struct AICounter
 
 public enum DestinationType
 {
+    None = 0,
     WorkPlace = 1,
     CoffePlace = 2,
     BusStop = 3,
@@ -78,6 +79,7 @@ public static class Const  {
                 tagGAMEMANAGER = "GameManager",
                 tagTRAFFICLIGHTCONTROLLER = "TrafficLightController",
                 tagZEBRA = "Zebra",
+                tagOBSERVER = "Observer",
                 tagSTREETLAMP = "StreetLamp";
 
 
