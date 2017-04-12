@@ -8,4 +8,10 @@ public interface Observer {
     void UpdateEnabledState(bool _enabled);
     void UpdateCount(Role _role, bool _created);
 
+    SortedList<DestinationType, int> GetDestianionsStatistics();
+    SortedList<bool, int> GetEnabledStatistics();
+    SortedList<Role, int> GetRolesStatistics();
+
+    void AddUI(ObserverUI _ui);
+    void NotifyUI();
 }

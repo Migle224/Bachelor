@@ -16,7 +16,7 @@
     <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
-    <UnityVersion>5.6.0f2</UnityVersion>
+    <UnityVersion>5.6.0f3</UnityVersion>
     <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
@@ -87,12 +87,14 @@
     <Compile Include="Assets\Scripts\AI\HomelessAI.cs" />
     <Compile Include="Assets\Scripts\AI\TuristAI.cs" />
     <Compile Include="Assets\Scripts\AI\UserCreatedAI.cs" />
+    <Compile Include="Assets\Scripts\BusController.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Const.cs" />
     <Compile Include="Assets\Scripts\DestinationInfo.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\LightContoller.cs" />
     <Compile Include="Assets\Scripts\Observer.cs" />
+    <Compile Include="Assets\Scripts\ObserverUI.cs" />
     <Compile Include="Assets\Scripts\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\SimulationManager.cs" />
     <Compile Include="Assets\Scripts\StatisticsObserver.cs" />

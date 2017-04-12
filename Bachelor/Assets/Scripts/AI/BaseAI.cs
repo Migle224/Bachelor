@@ -48,6 +48,7 @@ public class BaseAI
         simulationManager = GameObject.FindGameObjectWithTag(Const.tagSIMULATIONMANAGER).GetComponent<SimulationManager>();
         go.gameObject.transform.position = currentDestination.destination.transform.position;
         this.NotifyObservers(this.role, true);
+    //    this.NotifyObservers(true);
     }
 
     void AddComponents()
@@ -156,6 +157,9 @@ public class BaseAI
 
         if (nextDestination.time < gameManager.timeOfDay && !waitForNextDay)
             this.SetDestination();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            this.ResumeMovement();
     }
 
     public virtual void OnTriggerEnter(Collider other)
@@ -243,5 +247,18 @@ public class BaseAI
     public void OnDisable()
     {
         this.NotifyObservers(false);
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case Const.tagBUS:
+                go.gameObject.transform.parent = collision.gameObject.transform;
+                collision.gameObject.GetComponent<BusController>().AddToBus(go);
+                go.SetActive(false);
+                break;
+
+        }
     }
 }

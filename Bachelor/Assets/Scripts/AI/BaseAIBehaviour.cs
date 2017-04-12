@@ -52,8 +52,14 @@ public class BaseAIBehaviour : MonoBehaviour
         ai.OnDisable();
     }
 
- /*   void Awake()
+    /*   void Awake()
+       {
+           ai.Awake();
+       }*/
+
+    void OnCollisionEnter(Collision collision)
     {
-        ai.Awake();
-    }*/
+        ai.OnCollisionEnter(collision);
+    }
+
 }

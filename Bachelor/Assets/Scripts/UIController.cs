@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIController : MonoBehaviour
+public class UIController : MonoBehaviour, ObserverUI
 {
 
     public Text timeText;
@@ -19,6 +19,10 @@ public class UIController : MonoBehaviour
     public Dropdown usersAIDropdown;
     public InputField userAIAmount;
 
+    public Text rolesCount, destinationsCount, enabledCount, disabledCount;
+
+    Observer observer;
+
     void Start () {
         gameManager = GameObject.FindGameObjectWithTag(Const.tagGAMEMANAGER).GetComponent<GameManager>();
         employeeAmount.text = "0";
@@ -26,14 +30,61 @@ public class UIController : MonoBehaviour
         homelessAmount.text = "0";
         freeEmployeeAmount.text = "0";
         this.LoadDropDownAI();
+
+        rolesCount.text = "line1 \n line2 \n line 3";
+
+        observer = GameObject.FindGameObjectWithTag(Const.tagOBSERVER).GetComponent<Observer>();
+        observer.AddUI(this);
     }
 	
 	void Update () {
         timeToShow = (int)gameManager.timeOfDay;
         hours = (timeToShow /  60) % 24;
         minutes = timeToShow % 60;
-        timeText.text = hours +" hours " + minutes + "min.";
+        timeText.text = hours +" : " + minutes + " h";
 	}
+
+    public void UpdateObserverUI()
+    {
+        this.UpdateCountUI(observer.GetDestianionsStatistics());
+        this.UpdateEnabledUI(observer.GetEnabledStatistics());
+        this.UpdateRoleUI(observer.GetRolesStatistics());
+    }
+
+    void UpdateCountUI(SortedList<DestinationType, int> _destinationsCount)
+    {
+        if (destinationsCount != null)
+            destinationsCount.text = "";
+
+        foreach (KeyValuePair<DestinationType, int> destination in _destinationsCount)
+        {
+            if (destinationsCount != null)
+                destinationsCount.text += destination.Key + " : " + destination.Value + "\n";
+        }
+        
+    }
+
+    void UpdateRoleUI(SortedList<Role, int> _rolesCount)
+    {
+        if (rolesCount != null)
+            rolesCount.text = "";
+
+        foreach (KeyValuePair<Role, int> roles in _rolesCount)
+        {
+            if (rolesCount != null)
+                rolesCount.text += roles.Key + " : " + roles.Value + "\n";
+        }
+        
+    }
+
+    void UpdateEnabledUI(SortedList<bool, int> _enabledCount)
+    {
+        if(_enabledCount.ContainsKey(true) && _enabledCount != null)
+            enabledCount.text = "Enabled: " + _enabledCount[true];
+
+        if(_enabledCount.ContainsKey(false) && _enabledCount != null)
+            disabledCount.text = "Disabled: " + _enabledCount[false];
+    }
 
     public void SpeedUpTime()
     {
