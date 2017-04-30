@@ -79,11 +79,11 @@ public class UIController : MonoBehaviour, ObserverUI
 
     void UpdateEnabledUI(SortedList<bool, int> _enabledCount)
     {
-        if(_enabledCount.ContainsKey(true) && _enabledCount != null)
+       /* if(_enabledCount.ContainsKey(true) && _enabledCount != null)
             enabledCount.text = "Enabled: " + _enabledCount[true];
 
         if(_enabledCount.ContainsKey(false) && _enabledCount != null)
-            disabledCount.text = "Disabled: " + _enabledCount[false];
+            disabledCount.text = "Disabled: " + _enabledCount[false];*/
     }
 
     public void SpeedUpTime()

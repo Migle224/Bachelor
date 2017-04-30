@@ -10,12 +10,18 @@ public class GameManager : MonoBehaviour {
     SimulationManager simulationManager;
     public float dayStarts = 6 * 60, dayEnds = 18 * 60, midday;
     public int dayOfTheYear;
+    public GameObject testControllerPrefab;
+    GameObject testController;
 
     // Use this for initialization
     void Start () {
         simulationManager = GameObject.FindGameObjectWithTag(Const.tagSIMULATIONMANAGER).GetComponent<SimulationManager>();
         midday = dayStarts + (dayEnds - dayStarts) / 2;
-	}
+
+        testController = GameObject.FindGameObjectWithTag("TestController");
+        if (testController != null)
+            testController.GetComponent<TestController>().RunTest();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,6 +34,9 @@ public class GameManager : MonoBehaviour {
         {
             simulationManager.LoadSavedAI();
         }
+
+        if (Input.GetKeyDown(KeyCode.F3))
+            Instantiate(testControllerPrefab);
 	}
 
     public bool IsNight()

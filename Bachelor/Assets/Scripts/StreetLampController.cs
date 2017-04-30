@@ -16,7 +16,7 @@ public class StreetLampController : MonoBehaviour {
             streetLampsLights.Add(streetLamp.transform.GetChild(0).gameObject.GetComponent<Light>());
         gameManager = GameObject.FindGameObjectWithTag(Const.tagGAMEMANAGER).GetComponent<GameManager>();
         isNight = gameManager.IsNight();
-        nightLampColor = streetLampsLights[0].color;
+    //    nightLampColor = streetLampsLights[0].color;
     }
 	
 	// Update is called once per frame
