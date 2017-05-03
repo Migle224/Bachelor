@@ -17,7 +17,7 @@ public class TestController : MonoBehaviour
     bool savingData = false, testIsRunning = false, lastTest = false;
     GameManager gameManager;
     int nextTestTime = 6*60+5;
-    int testID = 1;
+    public int testID = 1;
     int savedFrame = 1;
     PerformanceCounter cpuCounter;
     System.TimeSpan PrevCPUPc, CurrCPUPc;
@@ -31,8 +31,8 @@ public class TestController : MonoBehaviour
         cameraClosePosition = new Vector3(-10f, 16.36f, 0.5f);
         cameraWidePosition = new Vector3(135f, 138f, -43f);
         testID = 1;
-        Profiler.logFile = Application.persistentDataPath + "/profilerLog.txt";
-        Profiler.enableBinaryLog = true;
+      //  Profiler.logFile = Application.persistentDataPath + "/profilerLog.txt";
+      //  Profiler.enableBinaryLog = true;
         Profiler.enabled = true;
         
     }
@@ -63,8 +63,9 @@ public class TestController : MonoBehaviour
 
         if (savingData)
         {
-           // rowDataTempCpu[savedFrame] = cpuCounter.NextValue().ToString();
-            rowDataTempCpu[savedFrame] = this.ReadCPUPC().ToString();
+            // rowDataTempCpu[savedFrame] = cpuCounter.NextValue().ToString();
+            // rowDataTempCpu[savedFrame] = this.ReadCPUPC().ToString();
+            rowDataTempCpu[savedFrame] = Time.deltaTime.ToString();
             savedFrame++;       
         }
 
@@ -79,6 +80,7 @@ public class TestController : MonoBehaviour
             if (lastTest)
             {
                 lastTest = false;
+                this.WriteToCSV();
                 Application.LoadLevel(Application.loadedLevel);
             }
         }
@@ -146,16 +148,17 @@ public class TestController : MonoBehaviour
         this.InitObjects();
         switch (testID)
         {
-            case 1:
+          /*  case 1:
                 this.SaveHeader("TEST1", 12, cameraClosePosition, 100);
-                this.RunTest(20, 20, 20, 20, cameraClosePosition, 100);
+                this.RunTest(20, 10, 20, 20, cameraClosePosition, 100);
+                
                 break;
-           /* case 2:
+            case 2:
                 this.SaveHeader("TEST2", 12, cameraClosePosition, 100);
                 this.RunTest(20, 20, 20, 20, cameraClosePosition, 100);
                 break;*/
             //12
-           /* case 1:
+          /*  case 1:
                 this.SaveHeader("TEST1", 12, cameraClosePosition, 4);
                 this.RunTest(3, 3, 3, 3, cameraClosePosition, 4);
                 break;
@@ -285,6 +288,7 @@ public class TestController : MonoBehaviour
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 4);
                 break;
             case 30:
+                amountOfAi = 2000;
                 this.SaveHeader("TEST" + testID, 48, cameraClosePosition, 16);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 16);
                 break;
@@ -305,51 +309,52 @@ public class TestController : MonoBehaviour
             case 34:
                 this.SaveHeader("TEST" + testID, 48, cameraClosePosition, 16);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 16);
-                break;
-            case 35:
+                break;*/
+            case 1:
+                amountOfAi = 5000;
                 this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 4);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 4);
                 break;
-            case 36:
+            case 2:
                 this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 16);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 16);
                 break;
             //8000
-            case 37:
+            case 3:
                 amountOfAi = 8000;
                 this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, 4);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 4);
                 break;
-            case 38:
+            case 4:
                 this.SaveHeader("TEST" + testID, 48, cameraClosePosition, 16);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 16);
                 break;
-            case 39:
+            case 5:
                 this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 4);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 4);
                 break;
-            case 40:
+            case 6:
                 this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 16);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 16);
                 break;
             //10000
-            case 41:
+            case 7:
                 amountOfAi = 10000;
                 this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, 4);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 4);
                 break;
-            case 42:
+            case 8:
                 this.SaveHeader("TEST" + testID, 48, cameraClosePosition, 16);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 16);
                 break;
-            case 43:
+            case 9:
                 this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 4);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 4);
                 break;
-            case 44:
+            case 10:
                 this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 16);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 16);
-                break;*/
+                break;
             default:
                 this.WriteToCSV();
                 UnityEditor.EditorApplication.isPlaying = false;
@@ -408,11 +413,12 @@ public class TestController : MonoBehaviour
             sb.AppendLine(string.Join(delimiter, output[index]));
 
 
-        string filePath = Application.dataPath + "/CSV/" + "Saved_data.csv";
+        string filePath = Application.dataPath + "/CSV/" + testID + "Saved_data.csv";
 
         StreamWriter outStream = System.IO.File.CreateText(filePath);
         outStream.WriteLine(sb);
         outStream.Close();
+       // dataToSave.Clear();
     }
         
 }

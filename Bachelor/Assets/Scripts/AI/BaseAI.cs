@@ -15,7 +15,7 @@ public class BaseAI
     protected GameObject go;
     protected BaseAIBehaviour baseAI;
     SimulationManager simulationManager;
-    bool waitForNextDay = false;
+    bool waitForNextDay = false, checkTrafficLight = false;
     string description;
     private List<Observer> observers = new List<Observer>();
     protected Role role;
@@ -48,6 +48,7 @@ public class BaseAI
         simulationManager = GameObject.FindGameObjectWithTag(Const.tagSIMULATIONMANAGER).GetComponent<SimulationManager>();
         go.gameObject.transform.position = currentDestination.destination.transform.position;
         this.NotifyObservers(this.role, true);
+        checkTrafficLight = false;
     //    this.NotifyObservers(true);
     }
 
@@ -160,6 +161,9 @@ public class BaseAI
 
         if (Input.GetKeyDown(KeyCode.Space))
             this.ResumeMovement();
+
+        if (checkTrafficLight && (Time.frameCount % 5 == 0))
+            this.CheckTrafficLightSignal();
     }
 
     public virtual void OnTriggerEnter(Collider other)
@@ -167,6 +171,7 @@ public class BaseAI
         switch (other.gameObject.tag)
         {
             case Const.tagZEBRA:
+                this.checkTrafficLight = true;
                 this.trafficLightCollider = other;
                 this.StartZebraPosition();
                 break;
@@ -192,7 +197,7 @@ public class BaseAI
 
     public void OnTriggerStay(Collider other)
     {
-        switch (other.gameObject.tag)
+      /*  switch (other.gameObject.tag)
         {
             case "Zebra":
                 this.CheckTrafficLightSignal();
@@ -205,7 +210,7 @@ public class BaseAI
                     simulationManager.AddToWakeUpList(this.go.gameObject, nextDestinaitonTime);
                 }
                 break;
-        }
+        }*/
     }
 
     public void OnTriggerExit(Collider other)
@@ -220,6 +225,7 @@ public class BaseAI
         if (string.Compare(trafficLightMaterial.name.Replace(" (Instance)", ""), trafficLightStopMaterial.name) != 0)
         {
             agent.isStopped = false;
+            checkTrafficLight = false;
         }
     }
 
