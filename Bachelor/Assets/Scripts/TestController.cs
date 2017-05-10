@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 using System.IO;
-using UnityEngine.Profiling;
+//using UnityEngine.Profiling;
 using System.Diagnostics;
 using System;
 
@@ -23,6 +23,7 @@ public class TestController : MonoBehaviour
     System.TimeSpan PrevCPUPc, CurrCPUPc;
     int amountOfAi;
     string[] rowDataTempCpu = new string[6];
+    int simulationSpeed;
     
 
     void Awake()
@@ -30,18 +31,18 @@ public class TestController : MonoBehaviour
         DontDestroyOnLoad(transform.gameObject);
         cameraClosePosition = new Vector3(-10f, 16.36f, 0.5f);
         cameraWidePosition = new Vector3(135f, 138f, -43f);
+       // cameraClosePosition = cameraWidePosition;
         testID = 1;
       //  Profiler.logFile = Application.persistentDataPath + "/profilerLog.txt";
       //  Profiler.enableBinaryLog = true;
-        Profiler.enabled = true;
-        
+     //   Profiler.enabled = true;
+        simulationSpeed = 4;
+
+
     }
     // Use this for initialization
     void Start()
-    {
-       
-
-       
+    {      
 
     }
 
@@ -86,7 +87,7 @@ public class TestController : MonoBehaviour
         }
     }
 
-    private int ReadCPUPC()
+  /*  private int ReadCPUPC()
     {
         int ToReturn = 0;
         PrevCPUPc = CurrCPUPc;
@@ -98,7 +99,7 @@ public class TestController : MonoBehaviour
         TimeSpan newCPUTime = CurrCPUPc - PrevCPUPc;
         ToReturn = (int)((100 * newCPUTime.TotalSeconds / (1.0f / Time.deltaTime)) / Environment.ProcessorCount);
         return ToReturn;
-    }
+    }*/
 
     int GetNextTestTime()
     {
@@ -128,18 +129,18 @@ public class TestController : MonoBehaviour
         simulationManager = GameObject.FindGameObjectWithTag(Const.tagSIMULATIONMANAGER).GetComponent<SimulationManager>();
         Time.timeScale = 1;
         gameManager = GameObject.FindGameObjectWithTag(Const.tagGAMEMANAGER).GetComponent<GameManager>();
-        cpuCounter = new PerformanceCounter();
+    /*    cpuCounter = new PerformanceCounter();
 
         cpuCounter.CategoryName = "Process";
         cpuCounter.CounterName = "% Processor Time";
         cpuCounter.InstanceName = "_Total";
-        cpuCounter.NextValue();
+        cpuCounter.NextValue();*/
     }
 
     public void RunTest()
     {
        
-        Profiler.enabled = true;
+       // Profiler.enabled = true;
 
         testIsRunning = true;
        
@@ -148,213 +149,65 @@ public class TestController : MonoBehaviour
         this.InitObjects();
         switch (testID)
         {
-          /*  case 1:
-                this.SaveHeader("TEST1", 12, cameraClosePosition, 100);
-                this.RunTest(20, 10, 20, 20, cameraClosePosition, 100);
-                
-                break;
-            case 2:
-                this.SaveHeader("TEST2", 12, cameraClosePosition, 100);
-                this.RunTest(20, 20, 20, 20, cameraClosePosition, 100);
-                break;*/
-            //12
-          /*  case 1:
-                this.SaveHeader("TEST1", 12, cameraClosePosition, 4);
-                this.RunTest(3, 3, 3, 3, cameraClosePosition, 4);
-                break;
-            case 2:
-                this.SaveHeader("TEST2", 12, cameraClosePosition, 16);
-                this.RunTest(3, 3, 3, 3, cameraClosePosition, 16);
-                break;
-            case 3:
-                this.SaveHeader("TEST3", 12, cameraWidePosition, 4);
-                this.RunTest(3, 3, 3, 3, cameraWidePosition, 4);
-                break;
-            case 4:
-                this.SaveHeader("TEST4", 12, cameraWidePosition, 16);
-                this.RunTest(3, 3, 3, 3, cameraWidePosition, 16);
-                break;
-                //48
-            case 5:
-                this.SaveHeader("TEST" + testID, 48, cameraClosePosition, 4);
-                this.RunTest(12, 12, 12, 12, cameraClosePosition, 4);
-                break;
-            case 6:
-                this.SaveHeader("TEST" + testID, 48, cameraClosePosition, 16);
-                this.RunTest(12, 12, 12, 12, cameraClosePosition, 16);
-                break;
-            case 7:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 4);
-                this.RunTest(12, 12, 12, 12, cameraWidePosition, 4);
-                break;
-            case 8:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 16);
-                this.RunTest(12, 12, 12, 12, cameraWidePosition, 16);
-                break;
-                //100
-            case 9:
-                amountOfAi = 100;
-                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, 4);
-                this.RunTest(amountOfAi/4, amountOfAi/4, amountOfAi/4, amountOfAi/4, cameraClosePosition, 4);
-                break;
-            case 10:
-                this.SaveHeader("TEST" + testID, 48, cameraClosePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 16);
-                break;
-            case 11:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 4);
-                break;
-            case 12:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 16);
-                break;
-            //200
-            case 13:
-                amountOfAi = 200;
-                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 4);
-                break;
-            case 14:
-                this.SaveHeader("TEST" + testID, 48, cameraClosePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 16);
-                break;
-            case 15:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 4);
-                break;
-            case 16:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 16);
-                break;
-            //200
-            case 17:
-                amountOfAi = 200;
-                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 4);
-                break;
-            case 18:
-                this.SaveHeader("TEST" + testID, 48, cameraClosePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 16);
-                break;
-            case 19:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 4);
-                break;
-            case 20:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 16);
-                break;
-            //500
-            case 21:
-                amountOfAi = 500;
-                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 4);
-                break;
-            case 22:
-                this.SaveHeader("TEST" + testID, 48, cameraClosePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 16);
-                break;
-            case 23:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 4);
-                break;
-            case 24:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 16);
-                break;
-            //1000
-            case 25:
-                amountOfAi = 1000;
-                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 4);
-                break;
-            case 26:
-                this.SaveHeader("TEST" + testID, 48, cameraClosePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 16);
-                break;
-            case 27:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 4);
-                break;
-            case 28:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 16);
-                break;
-            //2000
-            case 29:
-                amountOfAi = 2000;
-                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 4);
-                break;
-            case 30:
-                amountOfAi = 2000;
-                this.SaveHeader("TEST" + testID, 48, cameraClosePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 16);
-                break;
-            case 31:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 4);
-                break;
-            case 32:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 16);
-                break;
-            //5000
-            case 33:
-                amountOfAi = 5000;
-                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 4);
-                break;
-            case 34:
-                this.SaveHeader("TEST" + testID, 48, cameraClosePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 16);
-                break;*/
+            /*  case 1:
+                  this.SaveHeader("TEST1", 12, cameraClosePosition, 100);
+                  this.RunTest(20, 10, 20, 20, cameraClosePosition, 100);
+
+                  break;
+              case 2:
+                  this.SaveHeader("TEST2", 12, cameraClosePosition, 100);
+                  this.RunTest(20, 20, 20, 20, cameraClosePosition, 100);
+                  break;*/
             case 1:
-                amountOfAi = 5000;
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 4);
+                amountOfAi = 12;
+                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
+                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
                 break;
             case 2:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 16);
+                amountOfAi = 48;
+                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
+                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
                 break;
-            //8000
             case 3:
-                amountOfAi = 8000;
-                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 4);
+                amountOfAi = 100;
+                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
+                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
                 break;
             case 4:
-                this.SaveHeader("TEST" + testID, 48, cameraClosePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 16);
+                amountOfAi = 200;
+                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
+                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
                 break;
             case 5:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 4);
+                amountOfAi = 500;
+                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
+                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
                 break;
             case 6:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 16);
+                amountOfAi = 1000;
+                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
+                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
                 break;
-            //10000
             case 7:
-                amountOfAi = 10000;
-                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 4);
+                amountOfAi = 2000;
+                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
+                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
                 break;
             case 8:
-                this.SaveHeader("TEST" + testID, 48, cameraClosePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, 16);
+                amountOfAi = 5000;
+                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
+                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
                 break;
             case 9:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 4);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 4);
+                amountOfAi = 8000;
+                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
+                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
                 break;
             case 10:
-                this.SaveHeader("TEST" + testID, 48, cameraWidePosition, 16);
-                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraWidePosition, 16);
-                break;
+                amountOfAi = 10000;
+                this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
+                this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
+                break;           
             default:
                 this.WriteToCSV();
                 UnityEditor.EditorApplication.isPlaying = false;
@@ -413,7 +266,7 @@ public class TestController : MonoBehaviour
             sb.AppendLine(string.Join(delimiter, output[index]));
 
 
-        string filePath = Application.dataPath + "/CSV/" + testID + "Saved_data.csv";
+        string filePath = Application.dataPath + "/CSV/" + (testID - 1) + "Saved_data.csv";
 
         StreamWriter outStream = System.IO.File.CreateText(filePath);
         outStream.WriteLine(sb);

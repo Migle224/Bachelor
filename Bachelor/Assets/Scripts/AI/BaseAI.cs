@@ -197,7 +197,7 @@ public class BaseAI
 
     public void OnTriggerStay(Collider other)
     {
-      /*  switch (other.gameObject.tag)
+       /* switch (other.gameObject.tag)
         {
             case "Zebra":
                 this.CheckTrafficLightSignal();

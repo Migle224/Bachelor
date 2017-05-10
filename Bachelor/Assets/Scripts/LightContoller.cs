@@ -22,7 +22,7 @@ public class LightContoller : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-      /*  lightTransform.Rotate(Vector3.up * Time.deltaTime * changingSpeed, Space.World);
+        lightTransform.Rotate(Vector3.up * Time.deltaTime * changingSpeed, Space.World);
 
         if (!isNight && gameManager.timeOfDay < midday)
             lightTransform.Rotate(Vector3.right * Time.deltaTime * rotateRightSpeed);
@@ -39,7 +39,7 @@ public class LightContoller : MonoBehaviour {
         { 
             this.gameObject.gameObject.GetComponent<Light>().color = Color.black;
             isNight = true;
-        }*/
+        }
 
     }
 }

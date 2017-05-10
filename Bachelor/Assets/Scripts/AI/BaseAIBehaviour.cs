@@ -22,10 +22,10 @@ public class BaseAIBehaviour : MonoBehaviour
         ai.Start();
     }
 
-    void OnTriggerStay(Collider other)
+    /*void OnTriggerStay(Collider other)
     {
         ai.OnTriggerStay(other);
-    }
+    }*/
 
     void OnTriggerExit(Collider other)
     {
