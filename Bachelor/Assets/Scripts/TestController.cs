@@ -31,12 +31,12 @@ public class TestController : MonoBehaviour
         DontDestroyOnLoad(transform.gameObject);
         cameraClosePosition = new Vector3(-10f, 16.36f, 0.5f);
         cameraWidePosition = new Vector3(135f, 138f, -43f);
-       // cameraClosePosition = cameraWidePosition;
+        cameraClosePosition = cameraWidePosition;
         testID = 1;
       //  Profiler.logFile = Application.persistentDataPath + "/profilerLog.txt";
       //  Profiler.enableBinaryLog = true;
      //   Profiler.enabled = true;
-        simulationSpeed = 4;
+        simulationSpeed = 16;
 
 
     }

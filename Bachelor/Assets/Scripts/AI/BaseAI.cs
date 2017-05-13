@@ -90,7 +90,7 @@ public class BaseAI
             nextDestination = sheldule[1];
         }
 
-        go.GetComponent<Renderer>().material = currentDestination.destination.GetComponent<DestinationInfo>().destinationMaterial;
+        //go.GetComponent<Renderer>().material = currentDestination.destination.GetComponent<DestinationInfo>().destinationMaterial;
     }
 
     void NotifyObservers(GameObject _destination)
@@ -142,7 +142,7 @@ public class BaseAI
             nextDestination = sheldule[sheldule.FindIndex(isCurrent) + 1];
         }
 
-        go.GetComponent<Renderer>().material = currentDestination.destination.GetComponent<DestinationInfo>().destinationMaterial;
+        //go.GetComponent<Renderer>().material = currentDestination.destination.GetComponent<DestinationInfo>().destinationMaterial;
 
     }
 
