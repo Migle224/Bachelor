@@ -106,6 +106,8 @@
     <Compile Include="Assets\Scripts\TrafficLightController.cs" />
     <Compile Include="Assets\Scripts\UIController.cs" />
     <Compile Include="Assets\Scripts\UserAICreationUIController.cs" />
+    <Compile Include="Assets\Scripts\WalkTestEndPoint.cs" />
+    <Compile Include="Assets\Scripts\WalkTestStartPoint.cs" />
     <Compile Include="Assets\Scripts\WorldController.cs" />
     <Compile Include="Assets\Supercyan Character Pack Free Sample\Scripts\CameraLogic.cs" />
     <Compile Include="Assets\Supercyan Character Pack Free Sample\Scripts\Demo.cs" />

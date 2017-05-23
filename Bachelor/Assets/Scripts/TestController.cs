@@ -31,12 +31,12 @@ public class TestController : MonoBehaviour
         DontDestroyOnLoad(transform.gameObject);
         cameraClosePosition = new Vector3(-10f, 16.36f, 0.5f);
         cameraWidePosition = new Vector3(135f, 138f, -43f);
-        cameraClosePosition = cameraWidePosition;
+        //cameraClosePosition = cameraWidePosition;
         testID = 1;
       //  Profiler.logFile = Application.persistentDataPath + "/profilerLog.txt";
       //  Profiler.enableBinaryLog = true;
      //   Profiler.enabled = true;
-        simulationSpeed = 16;
+        simulationSpeed = 4;
 
 
     }
@@ -85,6 +85,11 @@ public class TestController : MonoBehaviour
                 Application.LoadLevel(Application.loadedLevel);
             }
         }
+    }
+
+    public void RunNextTest()
+    {
+        Application.LoadLevel(Application.loadedLevel);
     }
 
   /*  private int ReadCPUPC()
@@ -159,6 +164,7 @@ public class TestController : MonoBehaviour
                   this.RunTest(20, 20, 20, 20, cameraClosePosition, 100);
                   break;*/
             case 1:
+                Application.LoadLevel(Application.loadedLevel);
                 amountOfAi = 12;
                 this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
@@ -207,7 +213,7 @@ public class TestController : MonoBehaviour
                 amountOfAi = 10000;
                 this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
-                break;           
+                break;         
             default:
                 this.WriteToCSV();
                 UnityEditor.EditorApplication.isPlaying = false;

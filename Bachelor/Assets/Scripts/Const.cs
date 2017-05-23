@@ -82,6 +82,7 @@ public static class Const  {
                 tagOBSERVER = "Observer",
                 tagBUS = "Bus",
                 tabBUSSTOP = "BusStop",
+                tagTESTCONTOLLER = "TestController",
                 tagSTREETLAMP = "StreetLamp";
 
 
