@@ -232,7 +232,8 @@ public class BaseAI
     public void ResumeMovement()
     {
         this.NotifyObservers(true);//TODO write this somewhere else. On enabled
-        this.SetDestination();
+        if(agent.isActiveAndEnabled)
+            agent.SetDestination(currentDestination.destination.transform.position);
     }
 
     public void attach(Observer observer)

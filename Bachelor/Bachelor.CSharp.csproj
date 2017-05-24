@@ -78,6 +78,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AssetsNavMesh\Examples\Scripts\AgentLinkMover.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Examples\Scripts\ClickToMove.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Examples\Scripts\DestroyOnTrigger.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Examples\Scripts\DungeonManager.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Examples\Scripts\EnableIffSleeping.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Examples\Scripts\FreeCam.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Examples\Scripts\LocalNavMeshBuilder.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Examples\Scripts\MeshTool.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Examples\Scripts\NavMeshPrefabInstance.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Examples\Scripts\NavMeshSourceTag.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Examples\Scripts\Oscillator.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Examples\Scripts\RandomInstancing.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Examples\Scripts\RandomWalk.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Examples\Scripts\SpawnPrefabOnKeyDown.cs" />
+    <Compile Include="Assets\AssetsNavMesh\NavMeshComponents\Scripts\NavMeshLink.cs" />
+    <Compile Include="Assets\AssetsNavMesh\NavMeshComponents\Scripts\NavMeshModifier.cs" />
+    <Compile Include="Assets\AssetsNavMesh\NavMeshComponents\Scripts\NavMeshModifierVolume.cs" />
+    <Compile Include="Assets\AssetsNavMesh\NavMeshComponents\Scripts\NavMeshSurface.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Tests\NavMeshSurfaceAgentTests.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Tests\NavMeshSurfaceLinkTests.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Tests\NavMeshSurfaceModifierTests.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Tests\NavMeshSurfaceModifierVolumeTests.cs" />
+    <Compile Include="Assets\AssetsNavMesh\Tests\NavMeshSurfaceTests.cs" />
+    <Compile Include="Assets\NavMeshSurfaceController.cs" />
     <Compile Include="Assets\Scripts\AI\AIInfoWindowController.cs" />
     <Compile Include="Assets\Scripts\AI\AISponer.cs" />
     <Compile Include="Assets\Scripts\AI\BaseAI.cs" />
@@ -89,6 +113,7 @@
     <Compile Include="Assets\Scripts\AI\UserCreatedAI.cs" />
     <Compile Include="Assets\Scripts\BusController.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\CollisionCounter.cs" />
     <Compile Include="Assets\Scripts\Const.cs" />
     <Compile Include="Assets\Scripts\DestinationInfo.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />

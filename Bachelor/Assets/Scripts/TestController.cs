@@ -163,8 +163,8 @@ public class TestController : MonoBehaviour
                   this.SaveHeader("TEST2", 12, cameraClosePosition, 100);
                   this.RunTest(20, 20, 20, 20, cameraClosePosition, 100);
                   break;*/
-            case 1:
-                Application.LoadLevel(Application.loadedLevel);
+           /* case 1:
+               // Application.LoadLevel(Application.loadedLevel);
                 amountOfAi = 12;
                 this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
@@ -198,18 +198,18 @@ public class TestController : MonoBehaviour
                 amountOfAi = 2000;
                 this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
-                break;
-            case 8:
+                break;*/
+            case 1:
                 amountOfAi = 5000;
                 this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
                 break;
-            case 9:
+            case 2:
                 amountOfAi = 8000;
                 this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
                 break;
-            case 10:
+            case 3:
                 amountOfAi = 10000;
                 this.SaveHeader("TEST" + testID, amountOfAi, cameraClosePosition, simulationSpeed);
                 this.RunTest(amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, amountOfAi / 4, cameraClosePosition, simulationSpeed);
