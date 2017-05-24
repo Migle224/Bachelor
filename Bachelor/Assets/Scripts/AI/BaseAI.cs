@@ -20,6 +20,13 @@ public class BaseAI
     private List<Observer> observers = new List<Observer>();
     protected Role role;
 
+
+    float distanceToSlow = 5f;
+    public float distance;
+    float speedModifier = 0.04f, startSpeed;
+    public bool slow = false, speed = false;
+    float rotationDifference = 5f;
+
     public BaseAI()
     {
         this.role = Role.None;
@@ -49,7 +56,9 @@ public class BaseAI
         go.gameObject.transform.position = currentDestination.destination.transform.position;
         this.NotifyObservers(this.role, true);
         checkTrafficLight = false;
-    //    this.NotifyObservers(true);
+
+        startSpeed = agent.speed;
+        //    this.NotifyObservers(true);
     }
 
     void AddComponents()
@@ -164,6 +173,58 @@ public class BaseAI
 
         if (checkTrafficLight && (Time.frameCount % 5 == 0))
             this.CheckTrafficLightSignal();
+
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(go.gameObject.transform.position, go.gameObject.transform.forward, out hit))
+            {
+                distance = hit.distance;
+                if (hit.collider.gameObject.tag == "Agent")
+                {
+                    if (((int)hit.collider.transform.rotation.y % 360)  >= (int)go.gameObject.transform.rotation.y % 5 - rotationDifference
+                       &&  ((int)hit.collider.transform.rotation.y % 360) <= (int)go.gameObject.transform.rotation.y % 5 + rotationDifference)
+                    {
+                        if (distance < distanceToSlow)
+                        {
+                            slow = true;
+                            speed = false;
+                        }
+                        else
+                        {
+                            speed = true;
+                            slow = false;
+                        }
+                    }
+                    else
+                    {
+                        speed = true;
+                        slow = false;
+                    }
+                }
+                else
+                {
+                    speed = true;
+                    slow = false;
+                }
+
+            }
+            else
+            {
+                speed = true;
+                slow = false;
+            }
+
+        }
+
+        if (speed && agent.speed < startSpeed)
+        {
+            agent.speed += speedModifier;
+        }
+        if (slow)
+        {
+            agent.speed -= speedModifier;
+        }
+
     }
 
     public virtual void OnTriggerEnter(Collider other)

@@ -16,9 +16,9 @@ public class NavMeshSurfaceController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Time.frameCount % 150 == 0)
+     /*   if (Time.frameCount % 150 == 0)
        // if(Input.GetKeyDown(KeyCode.F2))
-            this.RecalculateNavMesh();
+            this.RecalculateNavMesh();*/
 	}
 
     void RecalculateNavMesh()
