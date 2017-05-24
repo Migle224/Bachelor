@@ -174,7 +174,7 @@ public class BaseAI
         if (checkTrafficLight && (Time.frameCount % 5 == 0))
             this.CheckTrafficLightSignal();
 
-        {
+       /* {
             RaycastHit hit;
             if (Physics.Raycast(go.gameObject.transform.position, go.gameObject.transform.forward, out hit))
             {
@@ -223,7 +223,7 @@ public class BaseAI
         if (slow)
         {
             agent.speed -= speedModifier;
-        }
+        }*/
 
     }
 

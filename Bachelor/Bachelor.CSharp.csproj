@@ -101,6 +101,7 @@
     <Compile Include="Assets\AssetsNavMesh\Tests\NavMeshSurfaceModifierTests.cs" />
     <Compile Include="Assets\AssetsNavMesh\Tests\NavMeshSurfaceModifierVolumeTests.cs" />
     <Compile Include="Assets\AssetsNavMesh\Tests\NavMeshSurfaceTests.cs" />
+    <Compile Include="Assets\mod.cs" />
     <Compile Include="Assets\NavMeshSurfaceController.cs" />
     <Compile Include="Assets\Scripts\AI\AIInfoWindowController.cs" />
     <Compile Include="Assets\Scripts\AI\AISponer.cs" />
