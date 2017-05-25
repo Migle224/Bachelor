@@ -223,8 +223,8 @@ public class BaseAI
         if (slow)
         {
             agent.speed -= speedModifier;
-        }*/
-
+        }
+        */
     }
 
     public virtual void OnTriggerEnter(Collider other)
