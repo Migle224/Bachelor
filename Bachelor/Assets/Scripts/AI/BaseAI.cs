@@ -11,7 +11,7 @@ public class BaseAI
     protected NavMeshAgent agent;
     Material trafficLightStopMaterial;
     Collider trafficLightCollider;
-    TrafficLightController trafficLightController;
+    TrafficLightsController trafficLightController;
     protected GameObject go;
     protected BaseAIBehaviour baseAI;
     SimulationManager simulationManager;
@@ -50,7 +50,7 @@ public class BaseAI
         this.AddComponents();
         gameManager = GameObject.FindGameObjectWithTag(Const.tagGAMEMANAGER).GetComponent<GameManager>();
         this.SetDestination(gameManager.timeOfDay);
-        trafficLightController = GameObject.FindGameObjectWithTag(Const.tagTRAFFICLIGHTCONTROLLER).GetComponent<TrafficLightController>();
+        trafficLightController = GameObject.FindGameObjectWithTag(Const.tagTRAFFICLIGHTCONTROLLER).GetComponent<TrafficLightsController>();
         trafficLightStopMaterial = trafficLightController.trafficLightStopMaterial;
         simulationManager = GameObject.FindGameObjectWithTag(Const.tagSIMULATIONMANAGER).GetComponent<SimulationManager>();
         go.gameObject.transform.position = currentDestination.destination.transform.position;
@@ -75,7 +75,8 @@ public class BaseAI
         {
             if (info.time > _timeOfDay)
             {
-                agent.SetDestination(last.destination.transform.position);
+                if (agent.isOnNavMesh)
+                    agent.SetDestination(last.destination.transform.position);
                 currentDestination = last;
                 nextDestination = info;
 
@@ -138,7 +139,8 @@ public class BaseAI
     {
         this.NotifyObservers(currentDestination.destination, nextDestination.destination);
         currentDestination = nextDestination;
-        agent.SetDestination(currentDestination.destination.transform.position);
+        if (agent.isOnNavMesh)
+            agent.SetDestination(currentDestination.destination.transform.position);
 
 
         if (currentDestination.Equals(sheldule[sheldule.Count - 1]))
@@ -171,8 +173,8 @@ public class BaseAI
         if (Input.GetKeyDown(KeyCode.Space))
             this.ResumeMovement();
 
-        if (checkTrafficLight && (Time.frameCount % 5 == 0))
-            this.CheckTrafficLightSignal();
+     /*   if (checkTrafficLight && (Time.frameCount % 5 == 0))
+            this.CheckTrafficLightSignal();*/
 
        /* {
             RaycastHit hit;
@@ -276,10 +278,11 @@ public class BaseAI
 
     public void OnTriggerExit(Collider other)
     {
-        agent.isStopped = false;
+        if (agent.isOnNavMesh)
+            agent.isStopped = false;
     }
 
-    void CheckTrafficLightSignal()
+    public void CheckTrafficLightSignal()
     {
         Material trafficLightMaterial = trafficLightCollider.gameObject.GetComponent<Renderer>().material;
 
@@ -293,7 +296,7 @@ public class BaseAI
     public void ResumeMovement()
     {
         this.NotifyObservers(true);//TODO write this somewhere else. On enabled
-        if(agent.isActiveAndEnabled)
+        if(agent.isOnNavMesh)
             agent.SetDestination(currentDestination.destination.transform.position);
     }
 
@@ -317,16 +320,4 @@ public class BaseAI
         this.NotifyObservers(false);
     }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-        switch (collision.gameObject.tag)
-        {
-            case Const.tagBUS:
-                go.gameObject.transform.parent = collision.gameObject.transform;
-                collision.gameObject.GetComponent<BusController>().AddToBus(go);
-                go.SetActive(false);
-                break;
-
-        }
-    }
 }

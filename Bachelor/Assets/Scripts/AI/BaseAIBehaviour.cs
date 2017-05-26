@@ -22,9 +22,13 @@ public class BaseAIBehaviour : MonoBehaviour
         ai.Start();
     }
 
-    void OnTriggerStay(Collider other)
+    /*  void OnTriggerStay(Collider other)
+      {
+          ai.OnTriggerStay(other);
+      }*/
+    public void CheckTrafficLightSignal()
     {
-        ai.OnTriggerStay(other);
+        ai.CheckTrafficLightSignal();
     }
 
     void OnTriggerExit(Collider other)
@@ -37,11 +41,6 @@ public class BaseAIBehaviour : MonoBehaviour
         ai.ResumeMovement();
     }
 
-    /*void OnEnable()
-    {
-        ai.OnEnable();
-    }*/
-
     void OnDestroy()
     {
         ai.OnDestroy();
@@ -50,16 +49,6 @@ public class BaseAIBehaviour : MonoBehaviour
     void OnDisable()
     {
         ai.OnDisable();
-    }
-
-    /*   void Awake()
-       {
-           ai.Awake();
-       }*/
-
-    void OnCollisionEnter(Collision collision)
-    {
-        ai.OnCollisionEnter(collision);
     }
 
 }
