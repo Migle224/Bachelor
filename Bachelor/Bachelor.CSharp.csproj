@@ -101,8 +101,6 @@
     <Compile Include="Assets\AssetsNavMesh\Tests\NavMeshSurfaceModifierTests.cs" />
     <Compile Include="Assets\AssetsNavMesh\Tests\NavMeshSurfaceModifierVolumeTests.cs" />
     <Compile Include="Assets\AssetsNavMesh\Tests\NavMeshSurfaceTests.cs" />
-    <Compile Include="Assets\mod.cs" />
-    <Compile Include="Assets\NavMeshSurfaceController.cs" />
     <Compile Include="Assets\Scripts\AI\BaseAI.cs" />
     <Compile Include="Assets\Scripts\AI\BaseAIBehaviour.cs" />
     <Compile Include="Assets\Scripts\AI\EmployeeAI.cs" />
@@ -121,6 +119,7 @@
     <Compile Include="Assets\Scripts\other\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\other\Const.cs" />
     <Compile Include="Assets\Scripts\other\GameManager.cs" />
+    <Compile Include="Assets\Scripts\other\NavMeshSurfaceController.cs" />
     <Compile Include="Assets\Scripts\other\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\other\SimulationManager.cs" />
     <Compile Include="Assets\Scripts\Test\TestController.cs" />

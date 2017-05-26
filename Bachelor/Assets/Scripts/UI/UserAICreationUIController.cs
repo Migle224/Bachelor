@@ -31,34 +31,38 @@ public class UserAICreationUIController : MonoBehaviour {
         {           
             time = activity.transform.GetChild(0).GetChild(2).gameObject.GetComponent<Text>();
             place = activity.transform.GetChild(1).GetComponent<Dropdown>();
-            shelduleByPlace.time = int.Parse(time.text) * 60;
 
-            activity.transform.GetChild(0).GetChild(2).gameObject.GetComponent<Text>().text = "";
-
-            switch (place.value)
+            if (int.TryParse(time.text, out shelduleByPlace.time))
             {
-                case 1:
-                    shelduleByPlace.destinationType = DestinationType.Home;
-                    sheldule.Add(shelduleByPlace);
-                    break;
-                case 2:
-                    shelduleByPlace.destinationType = DestinationType.BusStop;
-                    sheldule.Add(shelduleByPlace);
-                    break;
-                case 3:
-                    shelduleByPlace.destinationType = DestinationType.WorkPlace;
-                    sheldule.Add(shelduleByPlace);
-                    break;
-                case 4:
-                    shelduleByPlace.destinationType = DestinationType.CoffePlace;
-                    sheldule.Add(shelduleByPlace);
-                    break;
-                case 5:
-                    shelduleByPlace.destinationType = DestinationType.TuristPlace;
-                    sheldule.Add(shelduleByPlace);
-                    break;
+                shelduleByPlace.time *= 60;
+
+                activity.transform.GetChild(0).GetChild(2).gameObject.GetComponent<Text>().text = "";
+
+                switch (place.value)
+                {
+                    case 1:
+                        shelduleByPlace.destinationType = DestinationType.Home;
+                        sheldule.Add(shelduleByPlace);
+                        break;
+                    case 2:
+                        shelduleByPlace.destinationType = DestinationType.BusStop;
+                        sheldule.Add(shelduleByPlace);
+                        break;
+                    case 3:
+                        shelduleByPlace.destinationType = DestinationType.WorkPlace;
+                        sheldule.Add(shelduleByPlace);
+                        break;
+                    case 4:
+                        shelduleByPlace.destinationType = DestinationType.CoffePlace;
+                        sheldule.Add(shelduleByPlace);
+                        break;
+                    case 5:
+                        shelduleByPlace.destinationType = DestinationType.TuristPlace;
+                        sheldule.Add(shelduleByPlace);
+                        break;
+                }
+                activity.transform.GetChild(1).GetComponent<Dropdown>().value = 0;
             }
-            activity.transform.GetChild(1).GetComponent<Dropdown>().value = 0;
         }
         simulationManager.SaveUserAI(descriptionText.text, sheldule);
     }
